@@ -56,12 +56,13 @@ export const PizzaForm: React.FC<PizzaFormProps> = (props) => {
         }
     };
 
+    // the best way to make a pizza is from form data
     const makePizzaFromFormData = (formData: PizzaFormModel) => {
-        const size: Product = new Product('size', Number(formData.size))
-            , pizzaToppings: Product[] = Object.keys(formData)
+        const size: Product = new Product('size', Number(formData.size));
+        const pizzaToppings: Product[] = Object.keys(formData)
             .filter(key => {
                 // filter out size or unselected toppings
-                // @ts-ignore
+                // @ts-ignore TODO: properly infer type to formData[key]
                 return key !== 'size' && formData[key];
             })
             .map((key: string) => {

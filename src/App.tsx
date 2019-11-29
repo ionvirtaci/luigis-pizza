@@ -6,6 +6,7 @@ import {CustomerForm} from "./Forms/customer-form";
 import {CustomerData} from "./Model/customer";
 import {PizzaForm} from "./Forms/pizza-form";
 import {Pizza} from "./Model/pizza";
+import {PaymentForm} from "./Forms/payment-form";
 
 const App: React.FC = () => {
     const steps = ['You', 'Your pizza', 'Your card'];
@@ -28,7 +29,7 @@ const App: React.FC = () => {
             case 1:
                 return <PizzaForm onPizzaFormSubmit={handlePizzaFormSubmit}/>;
             case 2:
-                return <p>WIP</p>;
+                return <PaymentForm/>;
             default:
                 return <CustomerForm onCustomerFormSubmit={handleCustomerFormSubmit}/>;
         }
@@ -39,7 +40,7 @@ const App: React.FC = () => {
             <CssBaseline/>
             <Container maxWidth="sm">
                 <Box display="flex" flexDirection="column" justifyContent="center" style={{height: '100vh'}}>
-                    <Box style={{backgroundColor: '#eeeeee', height: '560px'}}>
+                    <Box style={{backgroundColor: '#eeeeee'}}>
                         <Stepper activeStep={activeStep} alternativeLabel>
                             {steps.map(label => (
                                 <Step key={label}>
@@ -47,7 +48,9 @@ const App: React.FC = () => {
                                 </Step>
                             ))}
                         </Stepper>
-                        {renderCurrentStep(activeStep)}
+                        <Box p={8}>
+                            {renderCurrentStep(activeStep)}
+                        </Box>
                     </Box>
                 </Box>
             </Container>
