@@ -56,7 +56,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = (props: PaymentFormProps)
                     {/* Expiration date (should be replaced by a more UX-friendly solution) */}
                     <Box width={1 / 2} pr={1}>
                         <TextField name="expirationDate"
-                                   label="Expiration date (e.g. MM/YY)"
+                                   label="Expiration (MM/YY)"
                                    inputRef={register({
                                        validate: expiration => isExpirationDateValid(expiration)
                                    })}
