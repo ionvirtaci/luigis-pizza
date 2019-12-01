@@ -2,7 +2,6 @@ import React from "react";
 import {Box, Container, CssBaseline, Step, StepLabel, Stepper} from "@material-ui/core";
 import JSONPretty from 'react-json-pretty';
 
-import './App.css';
 import {CustomerForm} from "./Forms/customer-form";
 import {Customer} from "./Model/customer";
 import {PizzaForm} from "./Forms/pizza-form";
@@ -12,6 +11,7 @@ import {Card} from "./Model/card";
 
 const App: React.FC = () => {
     const steps = ['You', 'Your pizza', 'Your card', 'All done'];
+    // TODO remove boilerplate and make custom hooks to set state; additionally, make stepper be bi-directional
     const [activeStep, setActiveStep] = React.useState(0);
     const [customer, setCustomer] = React.useState({});
     const [pizza, setPizza] = React.useState({});
