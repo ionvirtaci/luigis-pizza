@@ -7,19 +7,22 @@ import {CustomerData} from "./Model/customer";
 import {PizzaForm} from "./Forms/pizza-form";
 import {Pizza} from "./Model/pizza";
 import {PaymentForm} from "./Forms/payment-form";
+import {Card} from "./Model/card";
 
 const App: React.FC = () => {
-    const steps = ['You', 'Your pizza', 'Your card'];
+    const steps = ['You', 'Your pizza', 'Your card', 'All done'];
     const [activeStep, setActiveStep] = React.useState(0);
 
     const handleCustomerFormSubmit = (customerData: CustomerData) => {
         setActiveStep(1);
-        // TODO set state
     };
 
     const handlePizzaFormSubmit = (pizza: Pizza) => {
         setActiveStep(2);
-        // TODO set state
+    };
+
+    const handlePaymentFormSubmit = (card: Card) => {
+        setActiveStep(3);
     };
 
     const renderCurrentStep = (stepIdx: number) => {
@@ -29,7 +32,9 @@ const App: React.FC = () => {
             case 1:
                 return <PizzaForm onPizzaFormSubmit={handlePizzaFormSubmit}/>;
             case 2:
-                return <PaymentForm/>;
+                return <PaymentForm onPaymentFormSubmit={handlePaymentFormSubmit}/>;
+            case 3:
+                return <p>Payload iz: {}</p>;
             default:
                 return <CustomerForm onCustomerFormSubmit={handleCustomerFormSubmit}/>;
         }
@@ -48,7 +53,7 @@ const App: React.FC = () => {
                                 </Step>
                             ))}
                         </Stepper>
-                        <Box p={8}>
+                        <Box p={4}>
                             {renderCurrentStep(activeStep)}
                         </Box>
                     </Box>

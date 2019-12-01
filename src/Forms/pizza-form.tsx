@@ -28,17 +28,18 @@ interface PizzaFormModel {
     pepper?: boolean;
 }
 
-export const PizzaForm: React.FC<PizzaFormProps> = (props) => {
+export const PizzaForm: React.FC<PizzaFormProps> = (props: PizzaFormProps) => {
 
     // INIT
 
-    const {register, handleSubmit, watch, setValue, formState} = useForm({
-        mode: "onChange"
+    const {register, handleSubmit, watch, setValue, formState, errors, clearError} = useForm({
+        mode: 'onChange'
     });
     const pizzaSizes = PizzaSizes
         , toppings = Toppings
         , getPrice = getProductPrice
-        , watchAll = watch();
+        , watchAll = watch()
+        , watchSize = watch('size');
 
     // API
 
@@ -65,9 +66,9 @@ export const PizzaForm: React.FC<PizzaFormProps> = (props) => {
                 // @ts-ignore TODO: properly infer type to formData[key]
                 return key !== 'size' && formData[key];
             })
-            .map((key: string) => {
-                const price = getPrice(key, toppings) as number;
-                return new Product(key, price)
+            .map((label: string) => {
+                const price = getPrice(label, toppings) as number;
+                return new Product(label, price)
             });
         return new Pizza(size, pizzaToppings);
     };
@@ -81,7 +82,7 @@ export const PizzaForm: React.FC<PizzaFormProps> = (props) => {
         return pizza.size.price + toppingsTotalPrice;
     };
 
-    // Render
+    // RENDER
 
     return (
         <Container>
@@ -93,7 +94,7 @@ export const PizzaForm: React.FC<PizzaFormProps> = (props) => {
             </Box>
             {/* Form */}
             <form onSubmit={handleSubmit(onSubmit)}>
-                <Box display="flex" flexDirection="row" flexWrap="wrap" mt={4}>
+                <Box display="flex" flexDirection="row" flexWrap="wrap" mt={4} mb={4}>
                     <FormControl component="fieldset">
                         <FormLabel component="legend">Size</FormLabel>
                         <RHFInput name="size"
@@ -101,7 +102,7 @@ export const PizzaForm: React.FC<PizzaFormProps> = (props) => {
                                   setValue={setValue}
                                   type="radio"
                                   as={
-                                      <RadioGroup aria-label="size" defaultValue={pizzaSizes[0].price}>
+                                      <RadioGroup aria-label="size">
                                           {
                                               pizzaSizes.map(
                                                   (size: Product) => {
@@ -139,8 +140,13 @@ export const PizzaForm: React.FC<PizzaFormProps> = (props) => {
                         </FormGroup>
                     </FormControl>
                 </Box>
-                <Box display="flex" flexDirection="row" justifyContent="center" mt={2}>
-                    <Button variant="contained" type="submit">Next</Button>
+                <Box display="flex" flexDirection="row" justifyContent="center">
+                    <Button
+                        variant="contained"
+                        type="submit"
+                        disabled={!watchSize}>
+                        Next
+                    </Button>
                 </Box>
             </form>
         </Container>

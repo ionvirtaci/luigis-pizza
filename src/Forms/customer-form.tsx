@@ -7,11 +7,11 @@ interface CustomerFormProps {
     onCustomerFormSubmit: Function
 }
 
-export const CustomerForm: React.FC<CustomerFormProps> = (props) => {
+export const CustomerForm: React.FC<CustomerFormProps> = (props: CustomerFormProps) => {
 
     // INIT
     const {register, handleSubmit, formState, errors} = useForm({
-        mode: "onChange"
+        mode: 'onBlur'
     });
 
     // API
@@ -33,7 +33,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = (props) => {
     return (
         <Container>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <Box display="flex" flexDirection="row" flexWrap="wrap" mt={4}>
+                <Box display="flex" flexDirection="row" flexWrap="wrap" mt={4} mb={4}>
                     <Box width={1} mb={2}>
                         <TextField name="name"
                                    label="Full name"
@@ -89,8 +89,13 @@ export const CustomerForm: React.FC<CustomerFormProps> = (props) => {
                                    fullWidth/>
                     </Box>
                 </Box>
-                <Box display="flex" flexDirection="row" justifyContent="center" mt={2}>
-                    <Button variant="contained" type="submit" disabled={!formState.isValid}>Next</Button>
+                <Box display="flex" flexDirection="row" justifyContent="center">
+                    <Button
+                        variant="contained"
+                        type="submit"
+                        disabled={!formState.isValid}>
+                        Next
+                    </Button>
                 </Box>
             </form>
         </Container>
