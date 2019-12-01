@@ -13,7 +13,7 @@ import {
 import {RHFInput} from "react-hook-form-input";
 import useForm from "react-hook-form";
 
-import {Toppings, PizzaSizes, Product, getProductPrice, Pizza} from "../Model/pizza";
+import {Toppings, PizzaSizes, Product, getProductPrice, getPizzaPriceTotal, Pizza} from "../Model/pizza";
 
 
 interface PizzaFormProps {
@@ -32,7 +32,7 @@ export const PizzaForm: React.FC<PizzaFormProps> = (props: PizzaFormProps) => {
 
     // INIT
 
-    const {register, handleSubmit, watch, setValue, formState, errors, clearError} = useForm({
+    const {register, handleSubmit, watch, setValue} = useForm({
         mode: 'onChange'
     });
     const pizzaSizes = PizzaSizes
@@ -71,15 +71,6 @@ export const PizzaForm: React.FC<PizzaFormProps> = (props: PizzaFormProps) => {
                 return new Product(label, price)
             });
         return new Pizza(size, pizzaToppings);
-    };
-
-    const getPizzaPriceTotal = (pizza: Pizza) => {
-        const toppingsTotalPrice: number = pizza.toppings
-            .map((topping: Product) => topping.price)
-            .reduce((prevPrice: number, currPrice: number) => {
-                return prevPrice + currPrice;
-            }, 0);
-        return pizza.size.price + toppingsTotalPrice;
     };
 
     // RENDER

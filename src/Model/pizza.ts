@@ -34,3 +34,17 @@ export const getProductPrice = (label: string, productList: Product[]) => {
 
     return prodIdx > -1 ? productList[prodIdx].price : 0;
 };
+
+/**
+ * Gets the total price of a pizza
+ *
+ * @param pizza
+ */
+export const getPizzaPriceTotal = (pizza: Pizza) => {
+    const toppingsTotalPrice: number = pizza.toppings
+        .map((topping: Product) => topping.price)
+        .reduce((prevPrice: number, currPrice: number) => {
+            return prevPrice + currPrice;
+        }, 0);
+    return pizza.size.price + toppingsTotalPrice;
+};

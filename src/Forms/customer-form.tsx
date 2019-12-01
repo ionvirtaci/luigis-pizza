@@ -1,7 +1,7 @@
 import React from "react";
 import {Box, Button, Container, TextField} from "@material-ui/core";
 import useForm from "react-hook-form";
-import {CustomerData} from "../Model/customer";
+import {Customer} from "../Model/customer";
 
 interface CustomerFormProps {
     onCustomerFormSubmit: Function
@@ -17,7 +17,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = (props: CustomerFormPro
     // API
 
     const onSubmit = (data: any) => {
-        const customerData: CustomerData = new CustomerData(
+        const customerData: Customer = new Customer(
             data.name,
             data.streetName,
             data.houseNumber,

@@ -1,4 +1,4 @@
-export class CustomerData {
+export class Customer {
     constructor(name: string,
                 streetName: string,
                 houseNumber: number,
