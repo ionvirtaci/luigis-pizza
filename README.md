@@ -1,5 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Hosting link
+Hosted on [firebase](https://luigis-pizza-4334c.firebaseapp.com/)
+
 ## Available Scripts
 
 In the project directory, you can run:
